@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var burglar_mob_interactions: Area2D = $BurglarMobInteractions
 @onready var game: Node = $".."
 
-
+# continuosly gets input for direction
 func get_input():
 	var direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * speed
@@ -26,15 +26,18 @@ func get_input():
 	else:
 		$AnimatedSprite2D.frame = 0
 		$AnimatedSprite2D.stop()
-		
+
+
 func _physics_process(_delta):
 	get_input()
 	move_and_slide()
-	
+
+# Works as collission detection when the guard enters the hitbox for the burglar	
 func _on_burglar_mob_interactions_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Guard"):
 		print("Guard detected, choosing an action")
 		var n: int = randi() % 2
+		# Chooses a random action to do
 		if n == 1: 
 			game.remove_point()
 		else:

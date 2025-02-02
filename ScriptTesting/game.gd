@@ -54,10 +54,14 @@ func _on_timer_timeout() -> void:
 	if time_minutes == 0 and time_seconds == 0:
 		timer.stop()
 		
+		# Once timer ends, scene changes to end screen, scene is preloaded because it needs variables used
+		# by this game scene that the end screen scene needs.
 		var end_screen = preload("res://Scenes/end_screen.tscn").instantiate()
 		end_screen.score = score
 		end_screen.max_score = max_score
+		# Gets rid of this scene (main game scene)
 		get_tree().current_scene.queue_free()
+		# starts the end screen scene
 		get_tree().root.add_child(end_screen)
 
 # Whenever burglar bumps into a guard, it will either lose a point, or get time deducted
@@ -69,9 +73,6 @@ func add_time():
 	time_seconds += randi() % 11
 
 func start_countdown():
+	# Gets time from the system to use for the countdown
 	start_time = Time.get_unix_time_from_system()
 	running = true
-	
-
-	
-		

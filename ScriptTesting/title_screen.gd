@@ -10,7 +10,8 @@ func _ready() -> void:
 	instructions.hide()
 	credits.hide()
 	back_button.hide()
-	
+
+# Different buttons do different actions to change scenes accordingly.	
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
