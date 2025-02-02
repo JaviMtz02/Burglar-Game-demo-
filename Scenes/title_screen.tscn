@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://2r5e0ut01xxb"]
+
+[ext_resource type="Script" path="res://ScriptTesting/title_screen.gd" id="1_q6ehb"]
+[ext_resource type="FontFile" uid="uid://bsxv57t2kfbjr" path="res://Fonts/PixelOperator8.ttf" id="2_wy60w"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 7.0
+offset_right = 361.0
+offset_bottom = 243.0
+script = ExtResource("1_q6ehb")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 435.0
+offset_right = 734.0
+offset_bottom = 507.0
+theme_override_fonts/font = ExtResource("2_wy60w")
+theme_override_font_sizes/font_size = 48
+text = "START"
+icon_alignment = 1
+
+[node name="GameTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 20.0
+offset_right = 575.0
+offset_bottom = 413.0
+theme_override_fonts/font = ExtResource("2_wy60w")
+theme_override_font_sizes/font_size = 96
+text = "BURGLAR GAME (buggy version)"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="InstructionsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 516.0
+offset_right = 807.0
+offset_bottom = 606.0
+theme_override_fonts/font = ExtResource("2_wy60w")
+theme_override_font_sizes/font_size = 40
+text = "Instructions"
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 15.0
+offset_right = 974.0
+offset_bottom = 187.0
+theme_override_fonts/font = ExtResource("2_wy60w")
+theme_override_font_sizes/font_size = 32
+text = "Avoid Guards and collect coins before time runs out! You have a minute to collect as many as you can. Don't worry, you'll get plenty of time....."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Credits" type="Label" parent="."]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 284.0
+offset_right = 926.0
+offset_bottom = 503.0
+theme_override_fonts/font = ExtResource("2_wy60w")
+theme_override_font_sizes/font_size = 32
+text = "Credit:
+Art done by Javi Martinez
+Code done by Javi Martinez
+Thanks to ChatGPT and Youtube for whenever I was stuck :D"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 179.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("2_wy60w")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="InstructionsButton" to="." method="_on_instructions_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

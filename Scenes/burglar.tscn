@@ -1,0 +1,119 @@
+[gd_scene load_steps=15 format=3 uid="uid://dcwux66xdgkvs"]
+
+[ext_resource type="Script" path="res://ScriptTesting/burglar.gd" id="1_8gbj6"]
+[ext_resource type="Texture2D" uid="uid://dd0ckoulveqt0" path="res://Spritesheet/burglar_walking.png" id="2_jdkcu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rf1o"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(40, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi6ce"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(60, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hns5"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(80, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx102"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(100, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivbe5"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(120, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qigkf"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(140, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31q8h"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(0, 0, 20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0yxl"]
+atlas = ExtResource("2_jdkcu")
+region = Rect2(20, 0, 20, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivrf2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rf1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi6ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hns5")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx102")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivbe5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qigkf")
+}],
+"loop": true,
+"name": &"forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31q8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0yxl")
+}],
+"loop": true,
+"name": &"left_right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyrwi"]
+size = Vector2(10, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrlhe"]
+size = Vector2(17, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_310e7"]
+size = Vector2(31, 32)
+
+[node name="Burglar" type="CharacterBody2D"]
+position = Vector2(206, 232)
+collision_layer = 67
+script = ExtResource("1_8gbj6")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ivrf2")
+animation = &"forward"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 3)
+shape = SubResource("RectangleShape2D_eyrwi")
+
+[node name="BurglarMobInteractions" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurglarMobInteractions"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_qrlhe")
+
+[node name="BurglarInteractions" type="Area2D" parent="."]
+collision_layer = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurglarInteractions"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_310e7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[connection signal="body_entered" from="BurglarMobInteractions" to="." method="_on_burglar_mob_interactions_body_entered"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://uuthy3n7cdyu"]
+
+[ext_resource type="Script" path="res://ScriptTesting/minigame_door.gd" id="1_hv1kx"]
+[ext_resource type="Texture2D" uid="uid://byaaqhxufadni" path="res://tiles.png" id="2_k38by"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kpwu"]
+size = Vector2(67, 16)
+
+[node name="MinigameDoor" type="Area2D"]
+position = Vector2(1, 1)
+script = ExtResource("1_hv1kx")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(25.5, 4)
+scale = Vector2(4.1875, 1)
+texture = ExtResource("2_k38by")
+region_enabled = true
+region_rect = Rect2(-0.039711, 16.1074, 16.0156, 15.7729)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25.5, 4)
+shape = SubResource("RectangleShape2D_4kpwu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

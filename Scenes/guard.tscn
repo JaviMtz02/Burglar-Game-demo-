@@ -1,0 +1,137 @@
+[gd_scene load_steps=16 format=3 uid="uid://vqoom2fkvt5c"]
+
+[ext_resource type="Script" path="res://ScriptTesting/guard.gd" id="1_cpml8"]
+[ext_resource type="Texture2D" uid="uid://yxrvbdmy22hc" path="res://Spritesheet/guard_museum_movement.png" id="1_vangg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d51g2"]
+atlas = ExtResource("1_vangg")
+region = Rect2(100, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn7gr"]
+atlas = ExtResource("1_vangg")
+region = Rect2(120, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr4rl"]
+atlas = ExtResource("1_vangg")
+region = Rect2(140, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k48bb"]
+atlas = ExtResource("1_vangg")
+region = Rect2(40, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypqdd"]
+atlas = ExtResource("1_vangg")
+region = Rect2(60, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uh32"]
+atlas = ExtResource("1_vangg")
+region = Rect2(80, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrjun"]
+atlas = ExtResource("1_vangg")
+region = Rect2(0, 0, 20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j8vq"]
+atlas = ExtResource("1_vangg")
+region = Rect2(20, 0, 20, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1rhct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d51g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn7gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr4rl")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k48bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypqdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uh32")
+}],
+"loop": true,
+"name": &"forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrjun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j8vq")
+}],
+"loop": true,
+"name": &"left_right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4q2tr"]
+size = Vector2(10, 24)
+
+[sub_resource type="Gradient" id="Gradient_4vgjx"]
+offsets = PackedFloat32Array(0, 0.9)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5g2f2"]
+gradient = SubResource("Gradient_4vgjx")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pgfs"]
+size = Vector2(15, 27)
+
+[node name="Guard" type="CharacterBody2D" groups=["Guard"]]
+light_mask = 0
+position = Vector2(-1, -2)
+collision_layer = 5
+script = ExtResource("1_cpml8")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1rhct")
+animation = &"forward"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_4q2tr")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+navigation_layers = 64
+path_postprocessing = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 55)
+
+[node name="PointLight2D" type="PointLight2D" parent="RayCast2D"]
+position = Vector2(0, 31)
+scale = Vector2(0.109375, 0.796875)
+color = Color(1, 1, 0.152941, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_color = Color(0.118581, 0.118581, 0.118581, 0.945098)
+texture = SubResource("GradientTexture2D_5g2f2")
+offset = Vector2(5, 5)
+
+[node name="Area2D" type="Area2D" parent="." groups=["Guard"]]
+collision_layer = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Guard"]]
+light_mask = 64
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_5pgfs")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

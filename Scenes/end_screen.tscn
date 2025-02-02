@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://l5q76oecserd"]
+
+[ext_resource type="Script" path="res://ScriptTesting/end_screen.gd" id="1_i1usd"]
+[ext_resource type="FontFile" uid="uid://bsxv57t2kfbjr" path="res://Fonts/PixelOperator8.ttf" id="2_yd6wo"]
+
+[node name="End Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i1usd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1148.0
+offset_bottom = 647.0
+color = Color(1, 0.301961, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 84.0
+offset_right = 832.0
+offset_bottom = 203.0
+theme_override_fonts/font = ExtResource("2_yd6wo")
+theme_override_font_sizes/font_size = 64
+text = "You made it!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 223.0
+offset_right = 792.0
+offset_bottom = 271.0
+theme_override_fonts/font = ExtResource("2_yd6wo")
+theme_override_font_sizes/font_size = 48
+text = "Your Score: 0"
+
+[node name="PerfectRun" type="Label" parent="."]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 305.0
+offset_right = 1045.0
+offset_bottom = 461.0
+theme_override_fonts/font = ExtResource("2_yd6wo")
+theme_override_font_sizes/font_size = 48
+text = "You collected all the loot! Good Job :D"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="InPerfectRun" type="Label" parent="."]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 305.0
+offset_right = 915.0
+offset_bottom = 506.0
+theme_override_fonts/font = ExtResource("2_yd6wo")
+theme_override_font_sizes/font_size = 48
+text = "You did not get all the coins! The other Burglars are laughing at you!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 520.0
+offset_right = 753.0
+offset_bottom = 640.0
+theme_override_fonts/font = ExtResource("2_yd6wo")
+theme_override_font_sizes/font_size = 48
+text = "Main Menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
